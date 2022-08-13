@@ -1,0 +1,77 @@
+﻿@model Manufacturer
+
+@{
+    ViewData["Title"] = "Manufacturer";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+}
+
+
+<!-- End of Topbar -->
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Manufacturer</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fa fa-plus-circle fa-sm text-white-50"></i> Add Manufacturer
+        </a>
+    </div>
+    <!-- Content Row -->
+
+
+
+    <div class="row">
+        <div class="col-md-8">
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="ManufacturerName"></label>
+                    <input asp-for="ManufacturerName" type="text" class="form-control form-control-user" placeholder="Enter Your Name...">
+                    <span asp-validation-for="ManufacturerName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ManufacturerAddress"></label>
+                    <input asp-for="ManufacturerAddress" type="text" class="form-control form-control-user" placeholder="Enter Your Address...">
+                    <span asp-validation-for="ManufacturerAddress" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="ManufacturerContactNumber"></label>
+                    <input asp-for="ManufacturerContactNumber" type="text" class="form-control form-control-user" placeholder="Enter Your Contact Number...">
+                    <span asp-validation-for="ManufacturerContactNumber" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="ManufacturerProductType"></label>
+                    <select asp-for="ManufacturerProductType" class="form-control form-control-user">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <span asp-validation-for="ManufacturerProductType" class="text-danger"></span>
+                </div>
+
+                <a asp-controller="Manufacturer" asp-action="Create"> <input type="submit" class="btn btn-primary" value="Save"></a>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</div>
+<!-- /.container-fluid -->
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
