@@ -19,6 +19,10 @@
     <link href="~/Backend/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="~/Backend/css/sb-admin-2.min.css" rel="stylesheet">
+    <!--Toastr-->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
+
 </head>
 <body id="page-top">
     <div id="wrapper">
@@ -231,7 +235,7 @@
                     </ul>
 
                 </nav>
-
+                <partial name="_Notifications" />
                 @RenderBody()
 
             </div>

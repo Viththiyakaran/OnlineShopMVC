@@ -1,13 +1,10 @@
 ﻿@model Manufacturer
-
 @{
     ViewData["Title"] = "Manufacturer";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 
 
 }
-
-
 <!-- End of Topbar -->
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -15,7 +12,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Manufacturer</h1>
-        
+
     </div>
     <!-- Content Row -->
 
@@ -23,7 +20,14 @@
 
     <div class="row">
         <div class="col-md-8">
-            <form method="post">
+            <form method="post" asp-action="Edit">
+
+                <div class="form-group">
+                    <label asp-for="ManufacturerID"></label>
+                    <input asp-for="ManufacturerID" type="text" readonly class="form-control form-control-user" placeholder="Enter Your Name...">
+                    <span asp-validation-for="ManufacturerID" class="text-danger"></span>
+                </div>
+
                 <div class="form-group">
                     <label asp-for="ManufacturerName"></label>
                     <input asp-for="ManufacturerName" type="text" class="form-control form-control-user" placeholder="Enter Your Name...">
@@ -54,19 +58,19 @@
                     </select>
                     <span asp-validation-for="ManufacturerProductType" class="text-danger"></span>
                 </div>
+                <button type="submit" class="btn btn-primary" style="width:150px">Update </button>
 
-                <input type="submit" class="btn btn-primary" value="Save">
             </form>
         </div>
+
+
+
+
+
+
+
+
     </div>
-
-
-
-
-
-
-
-</div>
 <!-- /.container-fluid -->
 @section Scripts{
     @{

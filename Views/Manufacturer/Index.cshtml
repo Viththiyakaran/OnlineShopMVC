@@ -37,6 +37,7 @@
                                 <th>Product Type</th>
                                 <th>Is Active</th>
                                 <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -48,25 +49,33 @@
                                 <th>Product Type</th>
                                 <th>Is Active</th>
                                 <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                         </tfoot>
                         <tbody>
 
                             @foreach (var Obj in Model)
                             {
-                                <tr>
-                                    <td>@Obj.ManufacturerID</td>
-                                    <td>@Obj.ManufacturerName</td>
-                                    <td>@Obj.ManufacturerAddress</td>
-                                    <td>@Obj.ManufacturerContactNumber</td>
-                                    <td>@Obj.ManufacturerProductType</td>
-                                    <td>@Obj.ManufacturerIsActive</td>
-                                    <td>
-                                        <div class="btn btn-primary">
-                                            <a asp-controller="Manufacturer" asp-action="Edit" asp-route-id="@Obj.ManufacturerID"><i class="bi bi-pencil-square"></i>Edit</a>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>@Obj.ManufacturerID</td>
+                                <td>@Obj.ManufacturerName</td>
+                                <td>@Obj.ManufacturerAddress</td>
+                                <td>@Obj.ManufacturerContactNumber</td>
+                                <td>@Obj.ManufacturerProductType</td>
+                                <td>@Obj.ManufacturerIsActive</td>
+                                <td>
+
+                                    <a class="btn btn-primary" asp-controller="Manufacturer" asp-action="Edit" asp-route-id="@Obj.ManufacturerID"><i class="bi bi-pencil-square"></i>Edit</a>
+
+                                </td>
+                                <td>
+
+                                    <a class="btn btn-danger" asp-controller="Manufacturer" asp-action="Delete" asp-route-id="@Obj.ManufacturerID"><i class="bi bi-pencil-square"></i>Delete</a>
+
+                                </td>
+
+
+                            </tr>
 
 
 
