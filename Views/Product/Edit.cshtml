@@ -1,0 +1,76 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Manufacturer";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+}
+
+
+<!-- End of Topbar -->
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Product</h1>
+
+    </div>
+    <!-- Content Row -->
+
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input asp-for="ProductID" hidden />
+                    <label asp-for="ProductName" class="control-label"></label>
+                    <input asp-for="ProductName" class="form-control" />
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductDescription" class="control-label"></label>
+                    <input asp-for="ProductDescription" class="form-control" />
+                    <span asp-validation-for="ProductDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductPrice" class="control-label"></label>
+                    <input asp-for="ProductPrice" class="form-control" />
+                    <span asp-validation-for="ProductPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductImageFile" class="control-label"></label>
+                    
+                    <input asp-for="ProductImageFile" accept="image/*" />
+                    <span asp-validation-for="ProductImageFile" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+            </form> 
+        </div>
+        <div class="col-md-6">
+           
+                <div class="form-group">
+                    <label asp-for="ProductImageFile" class="control-label"></label>
+                    <img src="@("~/Image/"+ Model.ProductImageName)" asp-append-version="true" width="25%" />
+                </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</div>
+<!-- /.container-fluid -->
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
