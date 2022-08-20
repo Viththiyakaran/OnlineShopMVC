@@ -23,5 +23,9 @@ namespace OnlineStoreSara.Models
         public IFormFile ProductImageFile { get; set; }
        
         public string ProductImageName { get; set; }
+
+        public string ProductCategory { get; set; }
+
+        public DateTime ProductAddDateAndTime { get; set; } = DateTime.Now;
     }
 }
