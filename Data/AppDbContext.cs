@@ -16,6 +16,6 @@ namespace OnlineStoreSara.Data
 
         public DbSet<Manufacturer> manufacturers { get; set; }
 
-       
+       public DbSet<Product> products { get; set; }
     }
 }
