@@ -178,5 +178,12 @@ namespace OnlineStoreSara.Controllers
             return -1;
         }
 
+        public IActionResult Home()
+        {
+
+            return View();
+        }
+
+
     }
 }
