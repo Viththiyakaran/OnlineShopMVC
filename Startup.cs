@@ -62,7 +62,7 @@ namespace OnlineStoreSara
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+                    pattern: "{controller=Shop}/{action=Home}/{id?}");
             });
         }
     }

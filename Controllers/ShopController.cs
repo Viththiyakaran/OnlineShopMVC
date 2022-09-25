@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace OnlineStoreSara.Controllers
 {
@@ -180,8 +181,23 @@ namespace OnlineStoreSara.Controllers
 
         public IActionResult Home()
         {
+            var productList = _db.products.FromSqlRaw("select top 10 * from products").ToList() ;
 
-            return View();
+
+            var cart = SessionHelper.GetObjectFromJson<List<AddToCardItem>>(HttpContext.Session, "cart");
+
+            ViewBag.cart = cart;
+
+            if (cart == null)
+            {
+                ViewBag.Count = 0;
+            }
+            else
+            {
+                ViewBag.Count = cart.Sum(item => item.Qty);
+            }
+
+            return View(productList);
         }
 
 
