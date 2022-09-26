@@ -20,7 +20,7 @@ namespace OnlineStoreSara.Controllers
         public IActionResult Index(int pg= 1)
         {
             var listProduct = _db.products.ToList();
-            const int pageSize = 4;
+            const int pageSize = 3;
 
             if(pg<1)
             {
@@ -55,7 +55,46 @@ namespace OnlineStoreSara.Controllers
 
         }
 
-       
+        [HttpGet]
+        public IActionResult CatSearch(string cat,int pg = 1 )
+        {
+            var listProduct = _db.products.ToList().Where(c=> c.ProductCategory.StartsWith(cat));
+            const int pageSize = 3;
+
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+
+            int resCount = listProduct.Count();
+
+            var pager = new Pager(resCount, pg, pageSize);
+
+            int recSkip = (pg - 1) * pageSize;
+
+            var data = listProduct.Skip(recSkip).Take(pager.PageSize).ToList();
+
+            this.ViewBag.Pager = pager;
+
+            var cart = SessionHelper.GetObjectFromJson<List<AddToCardItem>>(HttpContext.Session, "cart");
+
+            ViewBag.cart = cart;
+
+            if (cart == null)
+            {
+                ViewBag.Count = 0;
+            }
+            else
+            {
+                ViewBag.Count = cart.Sum(item => item.Qty);
+            }
+
+
+            return View(data);
+
+        }
+
+
         public IActionResult Product(int? id)
         {
             if (id == null || id == 0)
@@ -181,7 +220,7 @@ namespace OnlineStoreSara.Controllers
 
         public IActionResult Home()
         {
-            var productList = _db.products.FromSqlRaw("select top 10 * from products").ToList() ;
+            var productList = _db.products.FromSqlRaw("select top 8 * from products order by ProductAddDateAndTime desc").ToList() ;
 
 
             var cart = SessionHelper.GetObjectFromJson<List<AddToCardItem>>(HttpContext.Session, "cart");

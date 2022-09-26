@@ -28,4 +28,6 @@ namespace OnlineStoreSara.Models
 
         public DateTime ProductAddDateAndTime { get; set; } = DateTime.Now;
     }
+
+    
 }
