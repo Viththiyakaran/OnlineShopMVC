@@ -49,7 +49,12 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="ProductCategory" class="control-label"></label>
-                    <input asp-for="ProductCategory" class="form-control" />
+                    <select asp-for="ProductCategory" class="form-control">
+                        <option value=""> Select Cateogry</option>
+                        <option value="Wood  furniture"> Wood  furniture</option>
+                        <option value="Industrial waves ">Industrial waves </option>
+                        <option value="Hand craft">Hand craft</option>
+                    </select>
                     <span asp-validation-for="ProductCategory" class="text-danger"></span>
                 </div>
                 <div class="form-group">
