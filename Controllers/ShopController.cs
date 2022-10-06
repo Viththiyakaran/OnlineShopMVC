@@ -20,7 +20,7 @@ namespace OnlineStoreSara.Controllers
         public IActionResult Index(int pg= 1)
         {
             var listProduct = _db.products.ToList();
-            const int pageSize = 3;
+            const int pageSize = 12;
 
             if(pg<1)
             {
@@ -59,7 +59,7 @@ namespace OnlineStoreSara.Controllers
         public IActionResult CatSearch(string cat,int pg = 1 )
         {
             var listProduct = _db.products.ToList().Where(c=> c.ProductCategory.StartsWith(cat));
-            const int pageSize = 3;
+            const int pageSize = 12;
 
             if (pg < 1)
             {
@@ -222,6 +222,9 @@ namespace OnlineStoreSara.Controllers
         {
             var productList = _db.products.FromSqlRaw("select top 8 * from products order by ProductAddDateAndTime desc").ToList() ;
 
+            var catlist = _db.products.Select(x=> x.ProductCategory).Distinct().ToList();
+
+            ViewBag.catlist = catlist;
 
             var cart = SessionHelper.GetObjectFromJson<List<AddToCardItem>>(HttpContext.Session, "cart");
 
@@ -237,6 +240,7 @@ namespace OnlineStoreSara.Controllers
             }
 
             return View(productList);
+
         }
 
 
