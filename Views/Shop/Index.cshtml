@@ -43,10 +43,10 @@
                     {
                         <div class="py-2 px-4 bg-dark text-white mb-3"><strong class="small text-uppercase fw-bold">@catT</strong></div>
 
-                        foreach (var c1 in Model.ToList().Where(e=> e.ProductCategory.Contains(catT)))
+                        foreach (var c in Model.ToList().Where(e=> e.ProductCategory.Contains(catT)).Take(5))
                         {
                             <ul class="list-unstyled small text-muted ps-lg-4 font-weight-normal">
-                                <li class="mb-2"><a class="reset-anchor" href="#!">@c1.ProductName</a></li>
+                                <li class="mb-2"><a class="reset-anchor" asp-controller="Shop" asp-action="Product" asp-route-id="@c.ProductID">@c.ProductName</a></li>
                               
                             </ul>
                         }

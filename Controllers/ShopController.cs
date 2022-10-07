@@ -24,10 +24,6 @@ namespace OnlineStoreSara.Controllers
             var catlist = _db.products.Select(x => x.ProductCategory).Distinct().ToList();
             ViewBag.catlist = catlist;
 
-            var catType1 = _db.products.ToList();
-            ViewBag.catType1 = catType1;
-
-
             var listProduct = _db.products.ToList();
             const int pageSize = 12;
 
