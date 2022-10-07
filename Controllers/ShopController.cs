@@ -19,6 +19,15 @@ namespace OnlineStoreSara.Controllers
         }
         public IActionResult Index(int pg= 1)
         {
+
+
+            var catlist = _db.products.Select(x => x.ProductCategory).Distinct().ToList();
+            ViewBag.catlist = catlist;
+
+            var catType1 = _db.products.ToList();
+            ViewBag.catType1 = catType1;
+
+
             var listProduct = _db.products.ToList();
             const int pageSize = 12;
 
@@ -58,6 +67,7 @@ namespace OnlineStoreSara.Controllers
         [HttpGet]
         public IActionResult CatSearch(string cat,int pg = 1 )
         {
+
             var listProduct = _db.products.ToList().Where(c=> c.ProductCategory.StartsWith(cat));
             const int pageSize = 12;
 
