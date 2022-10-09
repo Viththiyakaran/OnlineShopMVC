@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -21,12 +22,17 @@ namespace OnlineStoreSara.Models
 
         [NotMapped]
         public IFormFile ProductImageFile { get; set; }
-       
+        [Required]
         public string ProductImageName { get; set; }
-
+        [Required]
         public string ProductCategory { get; set; }
 
         public DateTime ProductAddDateAndTime { get; set; } = DateTime.Now;
+
+        
+        [DisplayName("Manufacturer ")]
+        public int ManufacturerID { get; set; }
+        public virtual Manufacturer Manufacturer { get; set; }
     }
 
     

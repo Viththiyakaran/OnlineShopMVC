@@ -60,10 +60,14 @@ namespace OnlineStoreSara.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ManufacturerID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ProductAddDateAndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ProductCategory")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductDescription")
@@ -71,6 +75,7 @@ namespace OnlineStoreSara.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductImageName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")
@@ -81,6 +86,8 @@ namespace OnlineStoreSara.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("ProductID");
+
+                    b.HasIndex("ManufacturerID");
 
                     b.ToTable("products");
                 });
@@ -115,6 +122,17 @@ namespace OnlineStoreSara.Migrations
                     b.HasKey("userid");
 
                     b.ToTable("users");
+                });
+
+            modelBuilder.Entity("OnlineStoreSara.Models.Product", b =>
+                {
+                    b.HasOne("OnlineStoreSara.Models.Manufacturer", "Manufacturer")
+                        .WithMany()
+                        .HasForeignKey("ManufacturerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Manufacturer");
                 });
 #pragma warning restore 612, 618
         }

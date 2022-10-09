@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineStoreSara.Data;
 using OnlineStoreSara.Models;
 using System;
@@ -27,6 +28,7 @@ namespace OnlineStoreSara.Controllers
         }
         public IActionResult Create()
         {
+            ViewData["ManufacturerID"] = new SelectList(_db.manufacturers, "ManufacturerID", "ManufacturerName");
             return View();
         }
 
@@ -34,8 +36,7 @@ namespace OnlineStoreSara.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Product Obj)
         {
-            if(ModelState.IsValid)
-            {
+            
                 
                 string wwwRootPath = _hostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(Obj.ProductImageFile.FileName);
@@ -50,10 +51,11 @@ namespace OnlineStoreSara.Controllers
                 _db.products.Add(Obj);
                 _db.SaveChanges();
                 TempData["Create"] = "Created New Successfully";
+                ViewData["ManufacturerID"] = new SelectList(_db.manufacturers, "ManufacturerID", "ManufacturerName");
                 return RedirectToAction("Index");
-            }
+           
 
-            return View();
+          
         }
 
         public IActionResult Edit(int? id)
@@ -70,7 +72,7 @@ namespace OnlineStoreSara.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["ManufacturerID"] = new SelectList(_db.manufacturers, "ManufacturerID", "ManufacturerName");
             return View(listData);
         }
 
@@ -78,9 +80,7 @@ namespace OnlineStoreSara.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Product Obj)
         {
-            
-            if (ModelState.IsValid)
-            {
+           
 
                 if (Obj.ProductImageFile != null)
                 {
@@ -100,10 +100,11 @@ namespace OnlineStoreSara.Controllers
                 _db.products.Update(Obj);
                 _db.SaveChanges();
                 TempData["Update"] = "Edit Item Successfully Done";
+                ViewData["ManufacturerID"] = new SelectList(_db.manufacturers, "ManufacturerID", "ManufacturerName");
                 return RedirectToAction("Index");
-            }
+            
 
-            return View();
+         
 
         }
 
@@ -120,7 +121,7 @@ namespace OnlineStoreSara.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["ManufacturerID"] = new SelectList(_db.manufacturers, "ManufacturerID", "ManufacturerName");
             return View(listData);
 
         }
@@ -147,6 +148,7 @@ namespace OnlineStoreSara.Controllers
             _db.products.Remove(listData);
             _db.SaveChanges();
             TempData["Delete"] = "Delete has been done";
+            ViewData["ManufacturerID"] = new SelectList(_db.manufacturers, "ManufacturerID", "ManufacturerName");
             return RedirectToAction("Index");
 
 

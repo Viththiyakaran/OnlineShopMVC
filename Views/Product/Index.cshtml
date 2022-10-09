@@ -32,7 +32,7 @@
                             <th>Description</th>
                             <th>Price</th>
                             <th>Image</th>
-                            <th>Is Active</th>
+                            <th>Manufacturer</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -44,7 +44,7 @@
                             <th>Description</th>
                             <th>Price</th>
                             <th>Image</th>
-                            <th>Is Active</th>
+                            <th>Manufacturer</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -61,7 +61,7 @@
                                 <td>
                                      <img src="@("~/Image/"+@Obj.ProductImageName)" asp-append-version="true" width="100px" height="100px" />
                                 </td>
-                                <td>Active</td>
+                                <td>@Obj.ManufacturerID</td>
                                 <td>
 
                                     <a class="btn btn-primary" asp-controller="Product" asp-action="Edit" asp-route-id="@Obj.ProductID"><i class="bi bi-pencil-square"></i>Edit</a>

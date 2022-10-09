@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model OnlineStoreSara.Models.Product;
 
 @{
     ViewData["Title"] = "Manufacturer";
@@ -57,6 +57,13 @@
                     </select>
                     <span asp-validation-for="ProductCategory" class="text-danger"></span>
                 </div>
+
+                <div class="form-group">
+                    <label asp-for="ManufacturerID" class="control-label"></label>
+                    <select asp-for="ManufacturerID" class="form-control" asp-items="ViewBag.ManufacturerID"></select>
+                </div>
+
+
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-primary" />
                 </div>
@@ -64,10 +71,18 @@
         </div>
         <div class="col-md-6">
            
-                <div class="form-group">
-                    <label asp-for="ProductImageFile" class="control-label"></label>
-                    <img src="@("~/Image/"+ Model.ProductImageName)" asp-append-version="true" width="25%" />
-                </div>
+            @*<div class="form-group">
+                <label asp-for="ProductImageFile" class="control-label"></label>
+                @if (Model.ProductImageName != null)
+                {
+                    <img src="@("~/Image/" + Model.ProductImageName)" asp-append-version="true" width="25%" />
+                }
+                else
+                {
+                    <img src="/Image/1220121174.jpg" asp-append-version="true" width="25%" />
+                }
+
+            </div>*@
         </div>
     </div>
 

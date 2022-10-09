@@ -33,6 +33,23 @@ namespace OnlineStoreSara.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult AdminLogin(Admin admin)
+        {
+            if (admin.username == "adm@gmail.com" && admin.password == "1234")
+            {
+                HttpContext.Session.SetString("userId", admin.username);
+                HttpContext.Session.SetString("userType", "Admin");
+                TempData["Login"] = "Login Successfully";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["Error"] = "Input Errors";
+                return View(admin);
+            }
+        }
+
         public IActionResult CreateCustomer()
         {
             return View();
@@ -72,6 +89,7 @@ namespace OnlineStoreSara.Controllers
                     if( isValid )
                     {
                         HttpContext.Session.SetString("userId", users.userEmail);
+                        HttpContext.Session.SetString("userType", "Customer");
                         TempData["Login"] = "Login Successfully";
                         return RedirectToAction("Index");
 

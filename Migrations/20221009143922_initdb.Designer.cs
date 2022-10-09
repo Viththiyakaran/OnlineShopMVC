@@ -10,8 +10,8 @@ using OnlineStoreSara.Data;
 namespace OnlineStoreSara.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220820052307_Next Update")]
-    partial class NextUpdate
+    [Migration("20221009143922_initdb")]
+    partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,10 +62,14 @@ namespace OnlineStoreSara.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ManufacturerID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ProductAddDateAndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ProductCategory")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductDescription")
@@ -73,6 +77,7 @@ namespace OnlineStoreSara.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductImageName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")
@@ -84,7 +89,52 @@ namespace OnlineStoreSara.Migrations
 
                     b.HasKey("ProductID");
 
+                    b.HasIndex("ManufacturerID");
+
                     b.ToTable("products");
+                });
+
+            modelBuilder.Entity("OnlineStoreSara.Models.Users", b =>
+                {
+                    b.Property<int>("userid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("userEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userFirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userLastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userRePassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("userid");
+
+                    b.ToTable("users");
+                });
+
+            modelBuilder.Entity("OnlineStoreSara.Models.Product", b =>
+                {
+                    b.HasOne("OnlineStoreSara.Models.Manufacturer", "Manufacturer")
+                        .WithMany()
+                        .HasForeignKey("ManufacturerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Manufacturer");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,73 @@
+﻿@model Users
+
+@{
+    ViewData["Title"] = "Manufacturer";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+}
+
+
+<!-- End of Topbar -->
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Products</h1>
+
+    </div>
+    <!-- Content Row -->
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="userFirstName" class="control-label"></label>
+                    <input asp-for="userFirstName" class="form-control" />
+                    <span asp-validation-for="userFirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="userLastName" class="control-label"></label>
+                    <input asp-for="userLastName" class="form-control" />
+                    <span asp-validation-for="userLastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="userEmail" class="control-label"></label>
+                    <input type="email" asp-for="userEmail" class="form-control" />
+                    <span asp-validation-for="userEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="userPassword" class="control-label"></label>
+                    <input type="email" asp-for="userPassword" class="form-control" />
+                    <span asp-validation-for="userPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="userRePassword" class="control-label"></label>
+                    <input type="email" asp-for="userRePassword" class="form-control" />
+                    <span asp-validation-for="userRePassword" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</div>
+<!-- /.container-fluid -->
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
