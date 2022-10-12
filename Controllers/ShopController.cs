@@ -149,6 +149,8 @@ namespace OnlineStoreSara.Controllers
                 ViewBag.Count = cart.Sum(item => item.Qty);
             }
 
+            
+
             return View();
 
         }
@@ -226,9 +228,9 @@ namespace OnlineStoreSara.Controllers
 
         public IActionResult Home()
         {
-            var productList = _db.products.FromSqlRaw("select top 8 * from products order by ProductAddDateAndTime desc").ToList() ;
+            var productList = _db.products.FromSqlRaw("select top 8 * from products order by ProductAddDateAndTime desc").ToList();
 
-            var catlist = _db.products.Select(x=> x.ProductCategory).Distinct().ToList();
+            var catlist = _db.products.Select(x => x.ProductCategory).Distinct().ToList();
 
             ViewBag.catlist = catlist;
 
@@ -249,6 +251,41 @@ namespace OnlineStoreSara.Controllers
 
         }
 
+       
+        public IActionResult Checkout(string userEmail)
+        {
+            if (userEmail == null || userEmail.Equals(""))
+            {
+                return RedirectToAction("CreateCustomer", "Dashboard");
+            }
+             
+
+            var listData = _db.users.FirstOrDefault(u => u.userEmail == userEmail);
+
+            if (listData == null)
+            {
+                return NotFound();
+            }
+            
+           
+
+            var cart = SessionHelper.GetObjectFromJson<List<AddToCardItem>>(HttpContext.Session, "cart");
+
+            ViewBag.cart = cart;
+
+            ViewBag.total = cart.Sum(item => item.Product.ProductPrice * item.Qty);
+
+            if (cart == null)
+            {
+                ViewBag.Count = 0;
+            }
+            else
+            {
+                ViewBag.Count = cart.Sum(item => item.Qty);
+            }
+            return View(listData);
+        }
 
     }
+
 }

@@ -21,6 +21,21 @@ namespace OnlineStoreSara.Models
         [DisplayName("Email")]
         public string userEmail { get; set; }
         [Required]
+        [DisplayName("Phone")]
+        public string userPhone { get; set; }
+        [Required]
+        [DisplayName("Address Line 1")]
+        public string userAddressLine1{ get; set; }
+        [Required]
+        [DisplayName("Address Line 2")]
+        public string userAddressLine2 { get; set; }
+        [Required]
+        [DisplayName("Town/City")]
+        public string userTown { get; set; }
+        [Required]
+        [DisplayName("Province")]
+        public string userProvince { get; set; }
+        [Required]
         [DisplayName("Password")]
         public string userPassword{ get; set; }
         [Required]

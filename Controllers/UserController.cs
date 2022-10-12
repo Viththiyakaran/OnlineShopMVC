@@ -19,7 +19,7 @@ namespace OnlineStoreSara.Controllers
         }
         public IActionResult Index()
         {
-            var userList = _db.users.Include("Manufacturer").ToList();
+            var userList = _db.users.ToList();
             return View(userList);
         }
 

@@ -1,0 +1,87 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+
+    var userId = Context.Session.GetString("userId");
+    var userType = Context.Session.GetString("userType");
+    if (userId == null)
+    {
+        Context.Response.Redirect("/Dashboard/CreateCustomer");
+
+    }
+}
+@model Users;
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="py-5">
+    <!-- BILLING ADDRESS-->
+    <h2 class="h5 text-uppercase mb-4">Billing details</h2>
+    <div class="row">
+        <div class="col-lg-8">
+            <form action="#">
+                <div class="row gy-3">
+                    <div class="col-lg-6">
+                        <label class="form-label text-sm text-uppercase" for="firstName">First name </label>
+                        <input class="form-control form-control-lg" type="text" id="firstName" value="@Model.userFirstName" placeholder="Enter your first name">
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label text-sm text-uppercase" for="lastName">Last name </label>
+                        <input class="form-control form-control-lg" type="text" value="@Model.userLastName" id="lastName" placeholder="Enter your last name">
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label text-sm text-uppercase" for="email">Email address </label>
+                        <input class="form-control form-control-lg" type="email" value="@Model.userEmail" id="email" placeholder="e.g. Jason@example.com">
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label text-sm text-uppercase" for="phone">Phone number </label>
+                        <input class="form-control form-control-lg" type="tel"  value="@Model.userPhone" id="phone" placeholder="e.g. +02 245354745">
+                    </div>
+                   
+
+                    <div class="col-lg-12">
+                        <label class="form-label text-sm text-uppercase" for="address">Address line 1 </label>
+                        <input class="form-control form-control-lg" type="text" value="@Model.userAddressLine1" id="address" placeholder="House number and street name">
+                    </div>
+                    <div class="col-lg-12">
+                        <label class="form-label text-sm text-uppercase" for="addressalt">Address line 2 </label>
+                        <input class="form-control form-control-lg" type="text" value="@Model.userAddressLine2"  id="addressalt" placeholder="Apartment, Suite, Unit, etc (optional)">
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label text-sm text-uppercase" for="city">Town/City </label>
+                        <input class="form-control form-control-lg"  value="@Model.userTown"  type="text" id="city">
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label text-sm text-uppercase" for="state">State/County </label>
+                        <input class="form-control form-control-lg" value="@Model.userProvince" type="text" id="state">
+                    </div>
+                   
+                    
+                    <div class="col-lg-12 form-group">
+                        <button class="btn btn-dark" type="submit">Place order</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- ORDER SUMMARY-->
+        <div class="col-lg-4">
+            <div class="card border-0 rounded-0 p-lg-4 bg-light">
+                <div class="card-body">
+                    <h5 class="text-uppercase mb-4">Your order</h5>
+                    <ul class="list-unstyled mb-0">
+
+                        @foreach (var item in (IEnumerable<AddToCardItem>)ViewBag.cart)
+                        {
+                            <li class="d-flex align-items-center justify-content-between"><strong class="small fw-bold">@item.Product.ProductName</strong><span class="text-muted small">LKR @(item.Product.ProductPrice* item.Qty )</span></li>
+                            <li class="border-bottom my-2"></li>
+                        }
+                            <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small fw-bold">Total</strong><span>LKR @ViewBag.total</span></li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+      </div>
+

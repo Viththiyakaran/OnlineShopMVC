@@ -37,7 +37,9 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-5 d-none d-lg-block ">
+                        <img src="/Backend/img/logo.jpg" width="483px" />
+                    </div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
@@ -56,10 +58,39 @@
                                         <span asp-validation-for="userLastName" class="text-danger"></span>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input asp-for="userEmail" type="email" class="form-control form-control-user" id="exampleFirstName"
+                                               placeholder="Email Address">
+                                        <span asp-validation-for="userEmail" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input asp-for="userPhone" class="form-control form-control-user" id="exampleLastName"
+                                               placeholder="Phone number">
+                                        <span asp-validation-for="userPhone" class="text-danger"></span>
+                                    </div>
+                                </div>
                                 <div class="form-group">
-                                    <input asp-for="userEmail" type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                           placeholder="Email Address">
-                                    <span asp-validation-for="userEmail" class="text-danger"></span>
+                                    <input asp-for="userAddressLine1"  class="form-control form-control-user" id="exampleInputEmail"
+                                           placeholder="Address Line 1">
+                                    <span asp-validation-for="userAddressLine1" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="userAddressLine2"  class="form-control form-control-user" id="exampleInputEmail"
+                                           placeholder="Address Line 2">
+                                    <span asp-validation-for="userAddressLine2" class="text-danger"></span>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input asp-for="userTown" class="form-control form-control-user" id="exampleFirstName"
+                                               placeholder="Town/City">
+                                        <span asp-validation-for="userTown" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input asp-for="userProvince" class="form-control form-control-user" id="exampleLastName"
+                                               placeholder="Province">
+                                        <span asp-validation-for="userProvince" class="text-danger"></span>
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
