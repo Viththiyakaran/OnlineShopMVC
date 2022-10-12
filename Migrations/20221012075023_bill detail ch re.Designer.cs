@@ -10,8 +10,8 @@ using OnlineStoreSara.Data;
 namespace OnlineStoreSara.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221011120431_User updatedb")]
-    partial class Userupdatedb
+    [Migration("20221012075023_bill detail ch re")]
+    partial class billdetailchre
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,76 @@ namespace OnlineStoreSara.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("OnlineStoreSara.Models.BillDetail", b =>
+                {
+                    b.Property<int>("billDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("billHeaderID")
+                        .HasColumnType("int");
+
+                    b.Property<double>("billPrice")
+                        .HasColumnType("float");
+
+                    b.Property<string>("billProduct")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("billQty")
+                        .HasColumnType("int");
+
+                    b.HasKey("billDetailId");
+
+                    b.HasIndex("billHeaderID");
+
+                    b.ToTable("billDetail");
+                });
+
+            modelBuilder.Entity("OnlineStoreSara.Models.BillHeader", b =>
+                {
+                    b.Property<int>("billHeaderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("billAddressLine1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billAddressLine2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billFirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billLastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billProvince")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billTown")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("billHeaderId");
+
+                    b.ToTable("billHeader");
+                });
 
             modelBuilder.Entity("OnlineStoreSara.Models.Manufacturer", b =>
                 {
@@ -146,6 +216,15 @@ namespace OnlineStoreSara.Migrations
                     b.ToTable("users");
                 });
 
+            modelBuilder.Entity("OnlineStoreSara.Models.BillDetail", b =>
+                {
+                    b.HasOne("OnlineStoreSara.Models.BillHeader", null)
+                        .WithMany("BillDetails")
+                        .HasForeignKey("billHeaderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("OnlineStoreSara.Models.Product", b =>
                 {
                     b.HasOne("OnlineStoreSara.Models.Manufacturer", "Manufacturer")
@@ -155,6 +234,11 @@ namespace OnlineStoreSara.Migrations
                         .IsRequired();
 
                     b.Navigation("Manufacturer");
+                });
+
+            modelBuilder.Entity("OnlineStoreSara.Models.BillHeader", b =>
+                {
+                    b.Navigation("BillDetails");
                 });
 #pragma warning restore 612, 618
         }

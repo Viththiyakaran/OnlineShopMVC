@@ -10,8 +10,8 @@ using OnlineStoreSara.Data;
 namespace OnlineStoreSara.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221009143922_initdb")]
-    partial class initdb
+    [Migration("20221012072253_bill header ch")]
+    partial class billheaderch
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,76 @@ namespace OnlineStoreSara.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("OnlineStoreSara.Models.BillDetail", b =>
+                {
+                    b.Property<int>("billDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("billHeaderID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("billPrice")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billProduct")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billQty")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("billDetailId");
+
+                    b.HasIndex("billHeaderID");
+
+                    b.ToTable("billDetail");
+                });
+
+            modelBuilder.Entity("OnlineStoreSara.Models.BillHeader", b =>
+                {
+                    b.Property<int>("billHeaderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("billAddressLine1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billAddressLine2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billFirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billLastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billProvince")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("billTown")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("billHeaderId");
+
+                    b.ToTable("billHeader");
+                });
 
             modelBuilder.Entity("OnlineStoreSara.Models.Manufacturer", b =>
                 {
@@ -101,6 +171,14 @@ namespace OnlineStoreSara.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("userAddressLine1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userAddressLine2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("userEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -117,13 +195,34 @@ namespace OnlineStoreSara.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("userPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userProvince")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("userRePassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userTown")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("userid");
 
                     b.ToTable("users");
+                });
+
+            modelBuilder.Entity("OnlineStoreSara.Models.BillDetail", b =>
+                {
+                    b.HasOne("OnlineStoreSara.Models.BillHeader", null)
+                        .WithMany("BillDetails")
+                        .HasForeignKey("billHeaderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OnlineStoreSara.Models.Product", b =>
@@ -135,6 +234,11 @@ namespace OnlineStoreSara.Migrations
                         .IsRequired();
 
                     b.Navigation("Manufacturer");
+                });
+
+            modelBuilder.Entity("OnlineStoreSara.Models.BillHeader", b =>
+                {
+                    b.Navigation("BillDetails");
                 });
 #pragma warning restore 612, 618
         }

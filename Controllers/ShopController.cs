@@ -262,6 +262,8 @@ namespace OnlineStoreSara.Controllers
 
             var listData = _db.users.FirstOrDefault(u => u.userEmail == userEmail);
 
+            ViewBag.usersData = listData;
+
             if (listData == null)
             {
                 return NotFound();
@@ -284,6 +286,51 @@ namespace OnlineStoreSara.Controllers
                 ViewBag.Count = cart.Sum(item => item.Qty);
             }
             return View(listData);
+        }
+
+        public IActionResult PlaceOrder(Users users)
+        {
+
+            BillHeader billHeader = new BillHeader();
+
+            billHeader.billFirstName = users.userFirstName;
+            billHeader.billLastName = users.userLastName;
+            billHeader.billEmail = users.userEmail;
+            billHeader.billPhone = users.userPhone;
+            billHeader.billAddressLine1 = users.userAddressLine1;
+            billHeader.billAddressLine2 = users.userAddressLine2;
+            billHeader.billTown = users.userTown;
+            billHeader.billProvince = users.userProvince;
+
+
+            var cart = SessionHelper.GetObjectFromJson<List<AddToCardItem>>(HttpContext.Session, "cart");
+
+            ViewBag.cart = cart;
+
+            ViewBag.total = cart.Sum(item => item.Product.ProductPrice * item.Qty);
+
+
+
+            _db.billHeader.Add(billHeader);
+            _db.SaveChanges();
+
+            List<BillDetail> billDetail = new List<BillDetail>();
+            foreach (var item in ViewBag.cart)
+            {
+
+                _db.billDetail.Add(new BillDetail
+                {
+                    
+                    billHeaderID = billHeader.billHeaderId,
+                    billProduct = item.Product.ProductName,
+                    billPrice = item.Product.ProductPrice,
+                    billQty = item.Qty
+                });
+                _db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+           // return View("Index");
         }
 
     }

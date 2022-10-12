@@ -9,7 +9,10 @@
 
     }
 }
+@*@model Users;*@
+
 @model Users;
+
 @{
     ViewData["Title"] = "Checkout";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,46 +23,47 @@
     <h2 class="h5 text-uppercase mb-4">Billing details</h2>
     <div class="row">
         <div class="col-lg-8">
-            <form action="#">
+            <form asp-action="PlaceOrder">
                 <div class="row gy-3">
                     <div class="col-lg-6">
                         <label class="form-label text-sm text-uppercase" for="firstName">First name </label>
-                        <input class="form-control form-control-lg" type="text" id="firstName" value="@Model.userFirstName" placeholder="Enter your first name">
+                        <input class="form-control form-control-lg" asp-for="userFirstName" type="text" id="firstName" value="@ViewBag.usersData.userFirstName" placeholder="Enter your first name">
                     </div>
                     <div class="col-lg-6">
                         <label class="form-label text-sm text-uppercase" for="lastName">Last name </label>
-                        <input class="form-control form-control-lg" type="text" value="@Model.userLastName" id="lastName" placeholder="Enter your last name">
+                        <input class="form-control form-control-lg" asp-for="userLastName" type="text" value="@ViewBag.usersData.userLastName" id="lastName" placeholder="Enter your last name">
                     </div>
                     <div class="col-lg-6">
                         <label class="form-label text-sm text-uppercase" for="email">Email address </label>
-                        <input class="form-control form-control-lg" type="email" value="@Model.userEmail" id="email" placeholder="e.g. Jason@example.com">
+                        <input class="form-control form-control-lg" asp-for="userEmail" type="email" value="@ViewBag.usersData.userEmail" id="email" placeholder="e.g. Jason@example.com">
                     </div>
                     <div class="col-lg-6">
                         <label class="form-label text-sm text-uppercase" for="phone">Phone number </label>
-                        <input class="form-control form-control-lg" type="tel"  value="@Model.userPhone" id="phone" placeholder="e.g. +02 245354745">
+                        <input class="form-control form-control-lg" asp-for="userPhone" type="tel" value="@ViewBag.usersData.userPhone" id="phone" placeholder="e.g. +02 245354745">
                     </div>
-                   
+
 
                     <div class="col-lg-12">
                         <label class="form-label text-sm text-uppercase" for="address">Address line 1 </label>
-                        <input class="form-control form-control-lg" type="text" value="@Model.userAddressLine1" id="address" placeholder="House number and street name">
+                        <input class="form-control form-control-lg" asp-for="userAddressLine1" type="text" value="@ViewBag.usersData.userAddressLine1" id="address" placeholder="House number and street name">
                     </div>
                     <div class="col-lg-12">
                         <label class="form-label text-sm text-uppercase" for="addressalt">Address line 2 </label>
-                        <input class="form-control form-control-lg" type="text" value="@Model.userAddressLine2"  id="addressalt" placeholder="Apartment, Suite, Unit, etc (optional)">
+                        <input class="form-control form-control-lg" asp-for="userAddressLine2" type="text" value="@ViewBag.usersData.userAddressLine2" id="addressalt" placeholder="Apartment, Suite, Unit, etc (optional)">
                     </div>
                     <div class="col-lg-6">
                         <label class="form-label text-sm text-uppercase" for="city">Town/City </label>
-                        <input class="form-control form-control-lg"  value="@Model.userTown"  type="text" id="city">
+                        <input class="form-control form-control-lg" asp-for="userTown" value="@ViewBag.usersData.userTown" type="text" id="city">
                     </div>
                     <div class="col-lg-6">
                         <label class="form-label text-sm text-uppercase" for="state">State/County </label>
-                        <input class="form-control form-control-lg" value="@Model.userProvince" type="text" id="state">
+                        <input class="form-control form-control-lg" asp-for="userProvince" value="@ViewBag.usersData.userProvince" type="text" id="state">
                     </div>
-                   
-                    
+
+
                     <div class="col-lg-12 form-group">
-                        <button class="btn btn-dark" type="submit">Place order</button>
+                        <input type="submit" class="btn btn-dark" value="Place order" />
+
                     </div>
                 </div>
             </form>
@@ -76,8 +80,9 @@
                             <li class="d-flex align-items-center justify-content-between"><strong class="small fw-bold">@item.Product.ProductName</strong><span class="text-muted small">LKR @(item.Product.ProductPrice* item.Qty )</span></li>
                             <li class="border-bottom my-2"></li>
                         }
-                            <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small fw-bold">Total</strong><span>LKR @ViewBag.total</span></li>
-                        </ul>
+                        <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small fw-bold">Total</strong><span>LKR @ViewBag.total</span></li>
+                    </ul>
+                    
                 </div>
             </div>
         </div>

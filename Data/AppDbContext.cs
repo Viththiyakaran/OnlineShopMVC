@@ -19,5 +19,9 @@ namespace OnlineStoreSara.Data
        public DbSet<Product> products { get; set; }
 
         public DbSet<Users> users { get; set; }
+
+        public DbSet<BillHeader> billHeader { get; set; }
+
+        public DbSet<BillDetail> billDetail { get; set; }
     }
 }

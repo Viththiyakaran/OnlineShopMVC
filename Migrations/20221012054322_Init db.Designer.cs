@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineStoreSara.Data;
 
 namespace OnlineStoreSara.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221012054322_Init db")]
+    partial class Initdb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,14 +31,14 @@ namespace OnlineStoreSara.Migrations
                     b.Property<int>("billHeaderID")
                         .HasColumnType("int");
 
-                    b.Property<double>("billPrice")
-                        .HasColumnType("float");
+                    b.Property<string>("billPrice")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("billProduct")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("billQty")
-                        .HasColumnType("int");
+                    b.Property<string>("billQty")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("billDetailId");
 
@@ -69,10 +71,6 @@ namespace OnlineStoreSara.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("billLastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("billPhone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -216,11 +214,13 @@ namespace OnlineStoreSara.Migrations
 
             modelBuilder.Entity("OnlineStoreSara.Models.BillDetail", b =>
                 {
-                    b.HasOne("OnlineStoreSara.Models.BillHeader", null)
+                    b.HasOne("OnlineStoreSara.Models.BillHeader", "BillHeader")
                         .WithMany("BillDetails")
                         .HasForeignKey("billHeaderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("BillHeader");
                 });
 
             modelBuilder.Entity("OnlineStoreSara.Models.Product", b =>
