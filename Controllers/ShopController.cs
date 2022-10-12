@@ -329,6 +329,8 @@ namespace OnlineStoreSara.Controllers
                 _db.SaveChanges();
             }
 
+            HttpContext.Session.Remove("cart");
+
             return RedirectToAction("Index");
            // return View("Index");
         }

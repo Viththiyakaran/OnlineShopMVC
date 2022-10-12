@@ -30,6 +30,6 @@ namespace OnlineStoreSara.Models
         [Required]
         public string billProvince { get; set; }
 
-        public virtual List<BillDetail> BillDetails { get; set; } = new List<BillDetail>();//detail very important
+        public DateTime billAddDateAndTime { get; set; } = DateTime.Now;
     }
 }
