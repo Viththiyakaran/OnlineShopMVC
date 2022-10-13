@@ -1,0 +1,90 @@
+﻿@model IEnumerable<BillHeader>;
+@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<!-- End of Topbar -->
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800"> New Orders</h1>
+    </div>
+    <!-- Content Row -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>View Order</th>
+                            <th>Procced</th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>View Order</th>
+                            <th>Procced</th>
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                        @foreach (var Obj in Model)
+                        {
+                        <tr>
+                            <td>@Obj.billHeaderId</td>
+                            <td>@Obj.billFirstName</td>
+                            <td>@Obj.billLastName</td>
+                            <td>@Obj.billAddressLine1, @Obj.billAddressLine2</td>
+                            <td>@Obj.billPhone</td>
+                            <td>@Obj.billEmail</td>
+                            <td>
+
+                                <a class="btn btn-success" asp-controller="Product" asp-action="ViewOrder" asp-route-id="@Obj.billHeaderId"><i class="bi bi-pencil-square"></i>View</a>
+
+                            </td>
+                            <td>
+
+                                <a class="btn btn-danger" asp-controller="Product" asp-action="Delete" asp-route-id="@Obj.billHeaderId"><i class="bi bi-pencil-square"></i>Delete</a>
+
+                            </td>
+                        </tr>
+
+
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</div>
+<!-- /.container-fluid -->

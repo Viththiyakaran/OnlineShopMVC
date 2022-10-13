@@ -35,5 +35,12 @@ namespace OnlineStoreSara.Models
         public virtual Manufacturer Manufacturer { get; set; }
     }
 
+    public class OrderRecords
+    {
+        public IEnumerable<BillDetail> billDetail { get; set; }
+
+        public IEnumerable<BillHeader> billHeader { get; set; }
+    }
+
     
 }

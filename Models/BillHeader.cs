@@ -31,5 +31,7 @@ namespace OnlineStoreSara.Models
         public string billProvince { get; set; }
 
         public DateTime billAddDateAndTime { get; set; } = DateTime.Now;
+
+        public bool isOrderPlaced { get; set; } = false;
     }
 }

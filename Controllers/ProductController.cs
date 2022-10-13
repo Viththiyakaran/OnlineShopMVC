@@ -176,6 +176,33 @@ namespace OnlineStoreSara.Controllers
 
             return fileName;
         }
+
+        public IActionResult Order()
+        {
+          
+            var orders = _db.billHeader.Where(item => item.isOrderPlaced ==false).ToList() ;
+
+            return View(orders);
+        }
+        
+       
+        public IActionResult ViewOrder(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var listData = _db.billDetail.ToList().Where(item => item.billHeaderID == id);
+
+            if (listData == null)
+            {
+                return NotFound();
+            }
+          
+            return View(listData);
+        }
+
     }
 }
 
