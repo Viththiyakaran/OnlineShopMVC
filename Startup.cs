@@ -64,6 +64,8 @@ namespace OnlineStoreSara
                     name: "default",
                     pattern: "{controller=Shop}/{action=Home}/{id?}");
             });
+
+            //Rotativa.RotativaConfiguration.Setup(env.WebRootPath, "../Rotativa");
         }
     }
 }

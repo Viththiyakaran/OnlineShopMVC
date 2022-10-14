@@ -34,4 +34,12 @@ namespace OnlineStoreSara.Models
 
         public bool isOrderPlaced { get; set; } = false;
     }
+
+    public class InvoiceView
+    { 
+        public IEnumerable<BillHeader> billHeader { get; set; }
+
+        public IEnumerable<BillDetail> billDetail { get; set; }
+    }
+
 }

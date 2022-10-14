@@ -1,10 +1,7 @@
-﻿@model OnlineStoreSara.Models.BillDetail
-
+﻿@model IEnumerable<BillDetail>;
 @{
-    ViewData["Title"] = "Manufacturer";
+    ViewData["Title"] = "Product";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-
-
 }
 
 
@@ -14,80 +11,57 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Product</h1>
-
+        <h1 class="h3 mb-0 text-gray-800"> New Orders</h1>
     </div>
     <!-- Content Row -->
-
-
-
-    <div class="row">
-        <div class="col-md-6">
-            <form asp-action="ViewOrder">
-                <input asp-for="billHeaderID" hidden />
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                
-                    <div class="form-group">
-                        <label asp-for="billProduct" class="control-label"></label>
-                        <input asp-for="billProduct" class="form-control" />
-                        <span asp-validation-for="billProduct" class="text-danger"></span>
-                    </div>
-                
-
-
-                @*<div class="form-group">
-            <label asp-for="ProductDescription" class="control-label"></label>
-            <input asp-for="ProductDescription" class="form-control" />
-            <span asp-validation-for="ProductDescription" class="text-danger"></span>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
         </div>
-        <div class="form-group">
-            <label asp-for="ProductPrice" class="control-label"></label>
-            <input asp-for="ProductPrice" class="form-control" />
-            <span asp-validation-for="ProductPrice" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ProductImageFile" class="control-label"></label>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Detail ID</th>
+                            <th>Product Name</th>
+                            <th>Unit Price</th>
+                            <th>Qty</th>
+                            <th>Total Price</th>
+                            
 
-            <input asp-for="ProductImageFile" accept="image/*" />
-            <span asp-validation-for="ProductImageFile" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ProductCategory" class="control-label"></label>
-            <select asp-for="ProductCategory" class="form-control">
-                <option value=""> Select Cateogry</option>
-                <option value="Wood  furniture"> Wood  furniture</option>
-                <option value="Industrial waves ">Industrial waves </option>
-                <option value="Hand craft">Hand craft</option>
-            </select>
-            <span asp-validation-for="ProductCategory" class="text-danger"></span>
-        </div>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Detail ID</th>
+                            <th>Product Name</th>
+                            <th>Unit Price</th>
+                            <th>Qty</th>
+                            <th>Total Price</th>
 
-        <div class="form-group">
-            <label asp-for="ManufacturerID" class="control-label"></label>
-            <select asp-for="ManufacturerID" class="form-control" asp-items="ViewBag.ManufacturerID"></select>
-        </div>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                        @foreach (var Obj in Model)
+                        {
+                            <tr>
+                                <td>@Obj.billDetailId</td>
+                                <td>@Obj.billProduct</td>
+                                <td>@Obj.billPrice</td>
+                                <td>@Obj.billQty</td>
+                                <td>@(Obj.billQty * Obj.billPrice)</td>
+                                
+                            </tr>
 
 
-        <div class="form-group">
-            <input type="submit" value="Update" class="btn btn-primary" />
-        </div>*@
-            </form>
-        </div>
-        <div class="col-md-6">
 
-            @*<div class="form-group">
-                    <label asp-for="ProductImageFile" class="control-label"></label>
-                    @if (Model.ProductImageName != null)
-                    {
-                        <img src="@("~/Image/" + Model.ProductImageName)" asp-append-version="true" width="25%" />
-                    }
-                    else
-                    {
-                        <img src="/Image/1220121174.jpg" asp-append-version="true" width="25%" />
-                    }
-
-                </div>*@
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -99,8 +73,3 @@
 
 </div>
 <!-- /.container-fluid -->
-@section Scripts{
-    @{
-        <partial name="_ValidationScriptsPartial" />
-    }
-}

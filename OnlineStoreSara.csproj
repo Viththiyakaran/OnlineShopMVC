@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Rotativa\" />
     <Folder Include="wwwroot\Frontend\" />
     <Folder Include="wwwroot\Backend\" />
     <Folder Include="wwwroot\Image\" />

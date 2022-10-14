@@ -31,7 +31,6 @@
                             <th>Phone</th>
                             <th>Email</th>
                             <th>View Order</th>
-                            <th>Procced</th>
 
                         </tr>
                     </thead>
@@ -44,7 +43,7 @@
                             <th>Phone</th>
                             <th>Email</th>
                             <th>View Order</th>
-                            <th>Procced</th>
+                           
 
                         </tr>
                     </tfoot>
@@ -52,24 +51,20 @@
 
                         @foreach (var Obj in Model)
                         {
-                        <tr>
-                            <td>@Obj.billHeaderId</td>
-                            <td>@Obj.billFirstName</td>
-                            <td>@Obj.billLastName</td>
-                            <td>@Obj.billAddressLine1, @Obj.billAddressLine2</td>
-                            <td>@Obj.billPhone</td>
-                            <td>@Obj.billEmail</td>
-                            <td>
+                            <tr>
+                                <td>@Obj.billHeaderId</td>
+                                <td>@Obj.billFirstName</td>
+                                <td>@Obj.billLastName</td>
+                                <td>@Obj.billAddressLine1, @Obj.billAddressLine2</td>
+                                <td>@Obj.billPhone</td>
+                                <td>@Obj.billEmail</td>
+                                <td>
 
-                                <a class="btn btn-success" asp-controller="Product" asp-action="ViewOrder" asp-route-id="@Obj.billHeaderId"><i class="bi bi-pencil-square"></i>View</a>
+                                    <a class="btn btn-success" asp-controller="Product" asp-action="ViewOrder" asp-route-id="@Obj.billHeaderId"><i class="bi bi-pencil-square"></i>View</a>
 
-                            </td>
-                            <td>
-
-                                <a class="btn btn-primary" asp-controller="Product" asp-action="Procced" asp-route-id="@Obj.billHeaderId"><i class="bi bi-pencil-square"></i>Procced</a>
-
-                            </td>
-                        </tr>
+                                </td>
+                               
+                            </tr>
 
 
 

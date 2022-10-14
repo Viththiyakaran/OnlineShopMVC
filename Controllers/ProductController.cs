@@ -203,6 +203,54 @@ namespace OnlineStoreSara.Controllers
             return View(listData);
         }
 
+        public IActionResult Procced( int? id)
+        {
+            var proccdData = _db.billHeader.Find(id);
+
+            proccdData.isOrderPlaced = true;
+
+            _db.billHeader.Update(proccdData);
+            _db.SaveChanges();
+            TempData["Update"] ="Order ID:  " + id + " Item Successfully Proceed To Ship";
+           
+            return RedirectToAction("Index", "Dashboard");
+        }
+
+        public IActionResult Shipping()
+        {
+            var orders = _db.billHeader.Where(item => item.isOrderPlaced == true).ToList();
+
+            return View(orders);
+        }
+
+        public IActionResult Invoices()
+        {
+            var orders = _db.billHeader.Where(item => item.isOrderPlaced == true).ToList();
+
+            return View(orders);
+        }
+
+        public IActionResult Invoice(int? id)
+        {
+            InvoiceView invoiceView = new InvoiceView();
+
+            invoiceView.billHeader = _db.billHeader.Where(item => item.billHeaderId == id).ToList();
+
+            invoiceView.billDetail = _db.billDetail.Where(item => item.billHeaderID == id).ToList();
+
+            ViewBag.total = 0;
+
+            foreach (var item in invoiceView.billDetail)
+            {
+                ViewBag.total =(item.billPrice * item.billQty);
+            }
+
+
+            return View(invoiceView);
+        }
+
+       
+
     }
 }
 
