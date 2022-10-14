@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineStoreSara.Data;
 using OnlineStoreSara.Models;
 using System;
@@ -20,7 +21,16 @@ namespace OnlineStoreSara.Controllers
 
         public IActionResult Index()
         {
-            return View();
+
+            ViewBag.SelectMonthSales = _db.billDetail.Sum(item => item.billPrice * item.billQty);
+
+            ViewBag.PendingShipping = _db.billHeader.Count(item => item.isOrderPlaced == false);
+
+            ViewBag.OrderDone = _db.billHeader.Count(item => item.isOrderPlaced ==true);
+
+            var orders = _db.billHeader.Where(item => item.isOrderPlaced == false).ToList();
+
+            return View(orders);
         }
 
         public IActionResult Login()
@@ -114,6 +124,8 @@ namespace OnlineStoreSara.Controllers
             HttpContext.Session.Clear();
             return View("Login");
         }
+
+        
 
     }
 }
