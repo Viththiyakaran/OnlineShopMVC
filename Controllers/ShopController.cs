@@ -335,6 +335,40 @@ namespace OnlineStoreSara.Controllers
            // return View("Index");
         }
 
+        public IActionResult UpdateProductQtyPlus(int id)
+        {
+            List<AddToCardItem> cart = SessionHelper.GetObjectFromJson<List<AddToCardItem>>(HttpContext.Session, "cart");
+
+            int index = isExist(id);
+
+           
+            cart[index].Qty++;
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+
+            return RedirectToAction("Cart");
+        }
+
+        public IActionResult UpdateProductQtyMin(int id)
+        {
+            List<AddToCardItem> cart = SessionHelper.GetObjectFromJson<List<AddToCardItem>>(HttpContext.Session, "cart");
+
+            int index = isExist(id);
+
+            if (cart[index].Qty >= 1) {
+                cart[index].Qty--;
+
+            }
+            else
+            {
+                cart[index].Qty = 0;
+            }
+            
+
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+
+            return RedirectToAction("Cart");
+        }
+
     }
 
 }

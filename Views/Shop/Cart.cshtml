@@ -36,38 +36,51 @@
                             <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Quantity</strong></th>
                             <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Total</strong></th>
                             <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase"></strong></th>
+                            <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase"></strong></th>
+                            <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase"></strong></th>
                         </tr>
                     </thead>
-                    <tbody class="border-0">
 
-                        @foreach (var item in (IEnumerable<AddToCardItem>)ViewBag.cart)
-                        {
-                            <tr>
-                                <th class="ps-0 py-3 border-light" scope="row">
-                                    <div class="d-flex align-items-center">
-                                        <a class="reset-anchor d-block animsition-link" href="detail.html"><img src="/Image/@item.Product.ProductImageName" alt="..." width="70" /></a>
-                                        <div class="ms-3"><strong class="h6"><a class="reset-anchor animsition-link" href="detail.html">@item.Product.ProductID</a></strong></div>
+                    <tbody class="border-0">
+                        
+
+                            @foreach (var item in (IEnumerable<AddToCardItem>)ViewBag.cart)
+                            {
+                        <tr>
+                            <th class="ps-0 py-3 border-light" scope="row">
+                                <div class="d-flex align-items-center">
+                                    <a class="reset-anchor d-block animsition-link" asp-action="Shop"><img src="/Image/@item.Product.ProductImageName" alt="..." width="70" /></a>
+                                    <div class="ms-3"><strong class="h6"><a class="reset-anchor animsition-link" href="detail.html">@item.Product.ProductID</a></strong></div>
+                                </div>
+                            </th>
+                            <td class="p-3 align-middle border-light">
+                                <p class="mb-0 small">LKR @item.Product.ProductPrice</p>
+                            </td>
+                            <td class="p-3 align-middle border-light">
+                                <div class="border d-flex align-items-center justify-content-between px-3">
+                                    <span class="small text-uppercase text-gray headings-font-family">Quantity</span>
+                                    <div class="quantity">
+
+                                        <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="@item.Qty" />
+
                                     </div>
-                                </th>
-                                <td class="p-3 align-middle border-light">
-                                    <p class="mb-0 small">LKR @item.Product.ProductPrice</p>
-                                </td>
-                                <td class="p-3 align-middle border-light">
-                                    <p class="mb-0 small"> @item.Qty</p>
-                                </td>
-                                <td class="p-3 align-middle border-light">
-                                    <p class="mb-0 small">@(item.Product.ProductPrice * item.Qty)</p>
-                                </td>
-                                <td class="p-3 align-middle border-light"><a class="reset-anchor" asp-controller="Shop" asp-action="Remove" asp-route-id="@item.Product.ProductID"><i class="fas fa-trash-alt small text-muted"></i></a></td>
-                            </tr>
+                                </div>
+                            </td>
+                            <td class="p-3 align-middle border-light">
+                                <p class="mb-0 small">@(item.Product.ProductPrice * item.Qty)</p>
+                            </td>
+                            <td class="p-3 align-middle border-light"><a class="reset-anchor" asp-controller="Shop" asp-action="UpdateProductQtyPlus" asp-route-id="@item.Product.ProductID"><i class="fas fa-plus  small text-muted"></i></a></td>
+                            <td class="p-3 align-middle border-light"><a class="reset-anchor" asp-controller="Shop" asp-action="UpdateProductQtyMin" asp-route-id="@item.Product.ProductID"><i class="fas fa-minus small text-muted"></i></a></td>
+                            <td class="p-3 align-middle border-light"><a class="reset-anchor" asp-controller="Shop" asp-action="Remove" asp-route-id="@item.Product.ProductID"><i class="fas fa-trash-alt small text-muted"></i></a></td>
+                        </tr>
 
                         }
+                           
 
-
-
-                    </tbody>
-                </table>
-            </div>
+                        </tbody>
+                    </table>
+                
+                </div>
             <!-- CART NAV-->
             <div class="bg-light px-4 py-3">
                 <div class="row align-items-center text-center">
@@ -94,7 +107,7 @@
                                         var userId = Context.Session.GetString("userId");
                                         var userType = Context.Session.GetString("userType");
 
-                                        <input type="text" asp-for="userEmail" name="userEmail" value="@userId" />
+                                        <input type="hidden" asp-for="userEmail" name="userEmail" value="@userId" />
                                     }
 
                                     <input type="submit" class="btn btn-dark btn-sm w-100" value="Procceed to checkout" />
