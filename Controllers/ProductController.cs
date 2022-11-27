@@ -249,7 +249,52 @@ namespace OnlineStoreSara.Controllers
             return View(invoiceView);
         }
 
-       
+       public ActionResult Stock()
+        {
+            var stocks = _db.products.ToList();
+            return View(stocks);
+        }
+
+        public IActionResult StockEdit(int? id)
+        {
+
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var listData = _db.products.Find(id);
+
+            if (listData == null)
+            {
+                return NotFound();
+            }
+            ViewData["ManufacturerID"] = new SelectList(_db.manufacturers, "ManufacturerID", "ManufacturerName");
+            return View(listData);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult StockEdit(int id, int ProductStock)
+        {
+            var stockData = _db.products.Find(id);
+
+            stockData.ProductStock = ProductStock;
+
+            _db.products.Update(stockData);
+            _db.SaveChanges();
+            TempData["Update"] = "Edit Item Successfully Done";
+            ViewData["ManufacturerID"] = new SelectList(_db.manufacturers, "ManufacturerID", "ManufacturerName");
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult ReportStock()
+        {
+           
+            var stockData = _db.products.ToList();
+
+            return View(stockData);
+        }
 
     }
 }
