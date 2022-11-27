@@ -46,12 +46,11 @@
 
                 <div class="form-group">
                     <label asp-for="ManufacturerProductType"></label>
-                    <select asp-for="ManufacturerProductType" class="form-control form-control-user">
-                        <option selected>Open this select menu</option>
-                            <option value=""> Select Cateogry</option>
-                            <option value="Wood  furniture"> Wood  furniture</option>
-                            <option value="Industrial waves ">Industrial waves </option>
-                            <option value="Hand craft">Hand craft</option>
+                    <select asp-for="ManufacturerProductType" class="form-control">
+                        <option value=""> Select Cateogry</option>
+                        <option value="Long sleeves"> Long sleeves</option>
+                        <option value="Short sleeves">Short sleeves</option>
+                        <option value="Casual shirts">Casual shirts</option>
                     </select>
                     <span asp-validation-for="ManufacturerProductType" class="text-danger"></span>
                 </div>
