@@ -288,7 +288,7 @@ namespace OnlineStoreSara.Controllers
             return View(listData);
         }
 
-        public readonly Methods methods;
+       
         public IActionResult PlaceOrder(Users users)
         {
 

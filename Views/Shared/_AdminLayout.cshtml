@@ -107,6 +107,16 @@
                     </a>
                 </li>
 
+                <!-- Nav Item - Charts -->
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Product" asp-action="Stock">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>
+                           Stock
+                        </span>
+                    </a>
+                </li>
+
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
@@ -129,7 +139,29 @@
             }
 
 
+            @if (userType == "Customer")
+            {
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="Dashboard" asp-action="Index">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
 
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Shop" asp-action="Index">
+                        <i class="fas fa-fw  fa-user-astronaut"></i>
+                        <span> Shopping</span>
+                    </a>
+                </li>
+
+            }
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

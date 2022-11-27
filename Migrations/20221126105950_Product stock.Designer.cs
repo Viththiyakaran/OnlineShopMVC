@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineStoreSara.Data;
 
 namespace OnlineStoreSara.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221126105950_Product stock")]
+    partial class Productstock
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,9 +38,6 @@ namespace OnlineStoreSara.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("billQty")
-                        .HasColumnType("int");
-
-                    b.Property<int>("productID")
                         .HasColumnType("int");
 
                     b.HasKey("billDetailId");
