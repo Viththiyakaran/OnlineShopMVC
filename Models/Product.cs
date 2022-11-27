@@ -33,6 +33,8 @@ namespace OnlineStoreSara.Models
         [DisplayName("Manufacturer ")]
         public int ManufacturerID { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
+        [DisplayName("Product Stock")]
+        public int ProductStock { get; set; }
     }
 
     public class OrderRecords

@@ -183,49 +183,62 @@
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>FirstName</th>
-                                    <th>LastName</th>
-                                    <th>Address</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>View Order</th>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>FirstName</th>
+                                        <th>LastName</th>
+                                        <th>Address</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Order Status</th>
+                                        <th>View Order</th>
 
 
-                                </tr>
+                                    </tr>
                             </thead>
                             <tfoot>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>FirstName</th>
-                                    <th>LastName</th>
-                                    <th>Address</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>View Order</th>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>FirstName</th>
+                                        <th>LastName</th>
+                                        <th>Address</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Order Status</th>
+                                        <th>View Order</th>
 
 
-                                </tr>
+                                    </tr>
                             </tfoot>
                             <tbody>
 
                                 @foreach (var Obj in Model.Where(item=>item.billEmail == userId))
                                 {
-                                    <tr>
-                                        <td>@Obj.billHeaderId</td>
-                                        <td>@Obj.billFirstName</td>
-                                        <td>@Obj.billLastName</td>
-                                        <td>@Obj.billAddressLine1, @Obj.billAddressLine2</td>
-                                        <td>@Obj.billPhone</td>
-                                        <td>@Obj.billEmail</td>
-                                        <td>
+                                <tr>
+                                    <td>@Obj.billHeaderId</td>
+                                    <td>@Obj.billFirstName</td>
+                                    <td>@Obj.billLastName</td>
+                                    <td>@Obj.billAddressLine1, @Obj.billAddressLine2</td>
+                                    <td>@Obj.billPhone</td>
+                                    <td>@Obj.billEmail</td>
+                                    <td>
+                                        @if (Obj.isOrderPlaced == false)
+                                        {
+                                            <button class="btn btn-dark"> PENDING</button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-success">Delivered</button>
+                                        }
 
-                                            <a class="btn btn-success" asp-controller="Product" asp-action="ViewOrder" asp-route-id="@Obj.billHeaderId"><i class="bi bi-pencil-square"></i>View</a>
+                                                                    </td>
+                                    <td>
 
-                                        </td>
+                                        <a class="btn btn-success" asp-controller="Product" asp-action="ViewOrder" asp-route-id="@Obj.billHeaderId"><i class="bi bi-pencil-square"></i>View</a>
 
-                                    </tr>
+                                    </td>
+
+                                </tr>
 
 
 

@@ -28,7 +28,7 @@ namespace OnlineStoreSara.Controllers
 
             ViewBag.OrderDone = _db.billHeader.Count(item => item.isOrderPlaced ==true);
 
-            var orders = _db.billHeader.Where(item => item.isOrderPlaced == false).ToList();
+            var orders = _db.billHeader.ToList();
 
             return View(orders);
         }

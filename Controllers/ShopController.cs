@@ -288,6 +288,7 @@ namespace OnlineStoreSara.Controllers
             return View(listData);
         }
 
+        public readonly Methods methods;
         public IActionResult PlaceOrder(Users users)
         {
 
@@ -324,10 +325,19 @@ namespace OnlineStoreSara.Controllers
                     billHeaderID = billHeader.billHeaderId,
                     billProduct = item.Product.ProductName,
                     billPrice = item.Product.ProductPrice,
-                    billQty = item.Qty
+                    billQty = item.Qty,
+                    productID = item.Product.ProductID
+
                 });
+
+                string sql = "Update products set ProductStock = ProductStock -" + item.Qty + " Where productID= " + item.Product.ProductID;
+
+                var stocks = _db.Database.ExecuteSqlRaw(sql);
+
                 _db.SaveChanges();
             }
+
+          
 
             HttpContext.Session.Remove("cart");
 

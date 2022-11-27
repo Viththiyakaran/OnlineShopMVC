@@ -25,6 +25,7 @@ namespace OnlineStoreSara.Models
 
         public double billPrice { get; set; }
         
+        public int productID { get; set; }
         
     }
 }
