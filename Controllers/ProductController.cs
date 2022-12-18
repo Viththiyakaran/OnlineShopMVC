@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using AspNetCore.Reporting;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineStoreSara.Data;
@@ -296,6 +297,25 @@ namespace OnlineStoreSara.Controllers
             return View(stockData);
         }
 
+        public IActionResult InvoiceInfo()
+        {
+            //InvoiceView invoiceView = new InvoiceView();
+
+            //invoiceView.billHeader = _db.billHeader.Where(item => item.billHeaderId == id).ToList();
+
+            //invoiceView.billDetail = _db.billDetail.Where(item => item.billHeaderID == id).ToList();
+
+            string mimeType = "";
+            int extension = 1;
+            var path = $"{_hostEnvironment.WebRootPath}\\Reports\\rptInvoice.rdlc";
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+            parameters.Add("customerName", "Viththiyakaran");
+            LocalReport localReport = new LocalReport(path);
+            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimeType);
+
+            return File(result.MainStream, "application/pdf");
+        }
     }
 }
 
